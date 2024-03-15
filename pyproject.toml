@@ -12,10 +12,13 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-install-requires = [
+dependencies = [
     "redis",
 ]
 
 [project.urls]
 Homepage = "https://github.com/jeanqussa/cm-worker"
 Issues = "https://github.com/jeanqussa/cm-worker/issues"
+
+[project.license]
+file = "LICENSE"

@@ -39,15 +39,19 @@ class Worker:
             # TODO Find a way to stop main thread
             raise LockError()
 
-    def start_updater_thread(self, job_id):
+    def start_updater_thread(self):
         def status_updater():
             while not self.is_exiting[0]:
+                if self.job_id is None:
+                    time.sleep(5)
+                    continue
+
                 # Make sure we still have the lock
                 self.check_lock()
 
                 # Update the status
                 timestamp = str(int(time.time()))
-                self.redis.hset(f'last_updates', job_id, timestamp)
+                self.redis.hset(f'last_updates', self.job_id, timestamp)
 
                 # Wait a bit
                 time.sleep(5)

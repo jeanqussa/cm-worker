@@ -1,0 +1,18 @@
+[project]
+name = "cm_worker"
+version = "0.0.1"
+authors = [
+  { name="Jean Qussa", email="jean.qussa@stud.uni-due.de" },
+]
+description = "CourseMapper Worker"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/jeanqussa/cm-worker"
+Issues = "https://github.com/jeanqussa/cm-worker/issues"

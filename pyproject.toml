@@ -13,7 +13,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 install_requires=[
-    "==5.0.3",
+    "redis==5.0.3",
 ]
 
 [project.urls]

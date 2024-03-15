@@ -130,7 +130,7 @@ class Worker:
         self.start_log_thread()
 
         # Spawn a thread to send status updates
-        self.start_updater_thread(self.job_id)
+        self.start_updater_thread()
 
         while True:
             # Wait for a hash to be pushed to queue:pending, then pop it and push it to queue:processing
@@ -150,6 +150,10 @@ class Worker:
 
             # Lock the job
             self.redis.hset(f'locks', self.job_id, self.worker_id)
+
+            # Update the status
+            timestamp = str(int(time.time()))
+            self.redis.hset(f'last_updates', self.job_id, timestamp)
 
             self.log_queue.put(f'CourseMapper Worker: Processing concept-map job {self.job_id}...')
 

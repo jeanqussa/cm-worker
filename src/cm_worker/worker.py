@@ -25,6 +25,7 @@ class Worker:
         self.is_exiting = [False]
         self.job_id = None
         self.pipelines = {}
+        self.log_to_console = False
 
     def check_lock(self):
         if self.job_id is None:
@@ -39,7 +40,7 @@ class Worker:
             raise LockError()
 
     def start_updater_thread(self, job_id):
-        def status_updater(self):
+        def status_updater():
             while not self.is_exiting[0]:
                 # Make sure we still have the lock
                 self.check_lock()
@@ -60,6 +61,8 @@ class Worker:
                 try:
                     log_message = self.log_queue.get(timeout=5)
                     timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+                    if self.log_to_console:
+                        print(f"{timestamp} [{self.worker_id}] {self.job_id}: {log_message}")
                     msg = json.dumps({
                         "worker_id": self.worker_id,
                         "job_id": self.job_id,

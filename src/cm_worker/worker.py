@@ -197,11 +197,11 @@ class Worker:
                 })
                 self._send_result(data)
 
-                # Clean up
-                self._clean_up()
-
                 # Print a message
                 self._log_queue.put(f'CourseMapper Worker: Finished processing concept-map job {self.job_id}')
+
+                # Clean up
+                self._clean_up()
             except LockError:
                 # Print the error
                 self._log_queue.put(f'CourseMapper Worker: Lost lock for job {self.job_id}')
